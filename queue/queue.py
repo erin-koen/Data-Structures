@@ -1,3 +1,8 @@
+'''
+Understand
+----------
+A queue is an ordered list
+'''
 class Queue:
   def __init__(self):
     self.size = 0
