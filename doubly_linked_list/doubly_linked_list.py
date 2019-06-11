@@ -44,6 +44,8 @@ class DoublyLinkedList:
         return self.length
 
     def add_to_head(self, value):
+        # insert a new node at the head of the DLL. 
+        # 
         self.head.insert_before(value)
         self.head = self.head.prev
 
