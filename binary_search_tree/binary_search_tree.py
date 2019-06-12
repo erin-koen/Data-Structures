@@ -42,7 +42,6 @@ class BinarySearchTree:
             return self.right.contains(target)
 
   def get_max(self):
-
       # base case - if get_max is called on a node which has no right node, it is the biggest in the tree. Return that node's value.
     if self.right is None:
         return self.value
@@ -51,4 +50,10 @@ class BinarySearchTree:
 
 
   def for_each(self, cb):
-    pass
+    # call the CB function on every value in the tree
+    cb(self.value)
+    # if the node has children, call for_each on them
+    if self.left is not None:
+        self.left.for_each(cb)
+    if self.right is not None:
+        self.right.for_each(cb)
