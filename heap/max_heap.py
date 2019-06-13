@@ -3,16 +3,30 @@ class Heap:
         self.storage = []
 
     def insert(self, value):
-        pass
+        self.storage.append(value)
+        self._bubble_up(len(self.storage)-1)
 
     def delete(self):
-        pass
+        # swap first and last items in the array (root for meaningless leaf)
+
+        self.storage[0], self.storage[len(
+            self.storage)-1] = self.storage[len(self.storage)-1], self.storage[0]
+
+        # pop off the last item in the array, has to happen before the sift so you need to store it in a variable to return
+        biggest = self.storage.pop()
+
+        # sift down the new top item in array
+        self._sift_down(0)
+
+        # return the former topmost value
+        return biggest
 
     def get_max(self):
-        pass
+        print(self.storage)
+        return self.storage[0]
 
     def get_size(self):
-        pass
+        return len(self.storage)
 
     def _bubble_up(self, index):
         # recieves an index, which is where the value currently is
@@ -32,18 +46,27 @@ class Heap:
     def _sift_down(self, index):
 
         # declare the children
-        i = index
-        right = 2*i+1
-        left = 2*i+2
-        # while there are children
-        while self.storage[right] is not None or self.storage[left] is not None:
-        # if the item at storage[index] is less than either of its children, swap it with the larger of the two.
-            if self.storage[i] < self.storage[left] or self.storage[i] < self.storage[right]:
-                if self.storage[left] > self.storage[right]:
-                    self.storage[i], self.storage[left] = self.storage[left], self.storage[i]
-                    i = left
-                else: 
-                    self.storage[i], self.storage[right] = self.storage[right], self.storage[i]
-                    i = right
+
+        left = 2*index+1
+
+        right = 2*index+2
+
+        # keep going till we compare the parent of the last node in the list
+        while left <= len(self.storage)-1 and right <= len(self.storage)-1:
+
+            # if the item at storage[index] is less than either of its children, swap it with the larger of the two.
+
+            if self.storage[index] < self.storage[left] and self.storage[left] >= self.storage[right]:
+                self.storage[index], self.storage[left] = self.storage[left], self.storage[index]
+                index = left
+                left = 2*index+1
+                right = 2*index+2
+
+            elif self.storage[index] < self.storage[right] and self.storage[right] >= self.storage[left]:
+                self.storage[index], self.storage[right] = self.storage[right], self.storage[index]
+                index = right
+                left = 2*index+1
+                right = 2*index+2
+
             else:
                 break
