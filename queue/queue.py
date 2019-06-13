@@ -1,15 +1,37 @@
-class Queue:
-  def __init__(self):
-    self.size = 0
-    # what data structure should we
-    # use to store queue elements?
-    self.storage = 
+'''
+Understand
+----------
+A queue is an ordered list. They're FIFO. Items get added to the back of the list, and taken off the front.
+- dequeueing == changing the second to last item in the list's next reference to Null.
+- enqueing == adding a new node with a next reference to the current head.
+- need to control for insertion? In other words, find a way to explicitly disallow it?
+- what happens when there's only one node? Or how do you instantiate a queue form nothing? What's the first node?
 
-  def enqueue(self, item):
-    pass
-  
-  def dequeue(self):
-    pass
+Plan
+----
+- create a Node class, create a LinkedList Class, then create Queue as a subclass of LinkedList with the QUeue-specific functions
 
-  def len(self):
-    pass
+*** IGNORE ALL THAT, DO IT AS A LIST***
+
+
+'''
+
+class Queue():
+    def __init__(self):
+        self.size = 0
+        self.storage = []
+
+
+    def enqueue(self, item):
+        self.storage.insert(0, item)
+        self.size += 1
+        
+    def dequeue(self):
+        if len(self.storage) == 0:
+            return None
+        else:
+            self.size -= 1
+            return self.storage.pop()
+
+    def len(self):
+        return self.size

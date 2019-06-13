@@ -35,34 +35,42 @@ class ListNode:
 """Our doubly-linked list class. It holds references to
 the list's head and tail nodes."""
 class DoublyLinkedList:
-  def __init__(self, node=None):
-    self.head = node
-    self.tail = node
-    self.length = 1 if node is not None else 0
+    def __init__(self, node=None):
+        self.head = node
+        self.tail = node
+        self.length = 1 if node is not None else 0
 
-  def __len__(self):
-    return self.length
+    def __len__(self):
+        return self.length
 
-  def add_to_head(self, value):
-    pass
+    def add_to_head(self, value):
+        self.head.insert_before(value)
+        self.head = self.head.prev
 
-  def remove_from_head(self):
-    pass
+    def remove_from_head(self):
+        val = self.head.value
+        self.head.delete()
+        return val
 
-  def add_to_tail(self, value):
-    pass
+    def add_to_tail(self, value):
+        self.tail.insert_before(value)
 
-  def remove_from_tail(self):
-    pass
+    def remove_from_tail(self):
+        val = self.tail.value
+        self.tail.delete()
+        return val
 
-  def move_to_front(self, node):
-    pass
+    def move_to_front(self, node):
 
-  def move_to_end(self, node):
-    pass
+        self.head.insert_before(node)
+        node.delete()
 
-  def delete(self, node):
-    pass
-    
-  def get_max(self):
-    pass
+    def move_to_end(self, node):
+        self.tail.insert_after(node)
+        node.delete()
+
+    def delete(self, node):
+        node.delete()
+
+    def get_max(self):
+        pass
