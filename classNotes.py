@@ -69,5 +69,69 @@ class LinkedList:
         #we've looped through the whole list and haven't found what we're looking for
         return False
 
+'''
+Tuesday
+
+Text Buffer
+-----------
+1) add characters from front and back 
+2) remove chars from front and back
+3) render the contents of buffer
+4) concatenate two buffers together (userful for copy/paste
+
+What data structure should we use? What are the trade offs?
+
+        prepend     append  delete_front    delete_back    join     print
+DLL     O(1)          O(1)      O(1)           O(1)         O(1)     O(n)  
+Array   O(n)          O(1)      O(n)           O(1)         O(n)     O(n)
+
+
+
+'''
+# import doubly_linked_list
+
+class TextBuffer:
+
+    def __init__(self, init=None):
+        self.contents = DoublyLinkedList
+        if init:
+            for char in init:
+                self.contents.add_to_tail(char)
+
+    def __str__(self):
+        s=""
+        current = self.contents.head
+        while current:
+            s+= current.value
+            current = current.next
+        return s
+        # no idea what this does, will have to watch again
+
+    def append(self, str_to_add):
+        for char in str_to_add:
+            self.contents.add_to_tail(char)
+
+    def prepend(self, str_to_add):
+        for char in str_to_add[::-1]:
+            self.contents.add_to_head(char)
     
+    def delete_front(self, chars_to_remove):
+        for _ in range(chars_to_remove):
+            self.contents.remove_from_head()
+
+    def delete_back(self, chars_to_remove):
+        for _ in range(chars_to_remove):
+            self.contents.remove_from_tail()
+    
+    def join(self, other_buffer):
+        # Connect the tail of this buffer with the head of the other buffer
+        self.contents.tail.next = other_buffer.contents.head
+        # Set the other buffer's head's previous to be self.tail
+        other_buffer.contents.head.prev = self.contents.tail
+        # Update other buffer's head to be this buffer's head
+        other_buffer.contents.head = self.contents.head
+        # Update this buffer's tail to be the other's tail
+        self.contents.tail = other_buffer.contents.tail
+
+
         
